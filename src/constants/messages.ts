@@ -1,0 +1,22 @@
+export const USER_MESSAGES = {
+  FULLNAME_IS_REQUIRED: 'Fullname is required',
+  FULLNAME_MUST_BE_A_STRING: 'Fullname must be a string',
+  FULLNAME_LENGTH_MUST_BE_FROM_1_TO_30: 'Fullname length must be from 1 to 30 characters',
+  LOCATION_IS_REQUIRED: 'Location must be required',
+  LOCATION_MUST_BE_A_STRING: 'Location must be a string',
+  LOCATION_LENGTH_MUST_BE_FROM_1_TO_30: 'Location length must be from 1 to 30 characters',
+  EMAIL_IS_REQUIRED: 'Email is required',
+  EMAIL_IS_INVALID: 'Email is not valid',
+  EMAIL_ALREADY_EXISTS: 'Email already exists',
+  PASSWORD_IS_REQUIRED: 'Password is required',
+  PASSWORD_MUST_BE_A_STRING: 'Password must be a string',
+  PASSWORD_LENGTH_MUST_BE_FROM_6_TO_50: 'Password length must be between 6 and 50 characters',
+  PASSWORD_MUST_BE_STRONG: 'Password must be strong',
+  REPEAT_PASSWORD_IS_REQUIRED: 'Repeat password is required',
+  REPEAT_PASSWORD_MUST_BE_A_STRING: 'Repeat password must be a string',
+  REPEAT_PASSWORD_LENGTH_MUST_BE_FROM_6_TO_50: 'Repeat password length must be between 6 and 50 characters',
+  REPEAT_PASSWORD_MUST_BE_STRONG: 'Repeat password must be strong',
+  REPEAT_PASSWORD_MUST_BE_THE_SAME_AS_PASSWORD: 'Repeat password must be the same as password',
+  REGISTER_SUCCESS: 'User registered successfully',
+  SOMETHING_WAS_WRONG_TRY_AGAIN_LATER: 'Something went wrong, try again later'
+} as const
