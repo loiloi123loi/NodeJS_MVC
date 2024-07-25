@@ -1,0 +1,11 @@
+<div class="form-row">
+  <% 
+    const _labelText = typeof labelText !== 'undefined' ? labelText : name
+    const _required = typeof required !== 'undefined' ? 'required' : '' 
+    const _accept = typeof accept !== 'undefined' ? accept : '' 
+  %>
+  <label class="form-label">
+    <%= _labelText %>
+  </label>
+  <input id=<%= name %> type=<%= type %> name=<%= name %> <%= _required %> <%= _accept ? 'accept='+_accept : '' %> class="form-input" />
+</div>
