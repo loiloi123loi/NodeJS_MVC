@@ -3,17 +3,17 @@
   <form class="form" action="/register" method="post">
     <%- include('./partials/logo.ejs') %>
     <h4>Register</h4>
-    <%- include('./partials/form-row.ejs', {type: 'text', name: 'fullName', labelText: 'full name'}) %>
-    <%- include('./partials/form-row.ejs', {type: 'text', name: 'location'}) %>
-    <%- include('./partials/form-row.ejs', {type: 'email', name: 'email'}) %>
-    <%- include('./partials/form-row.ejs', {type: 'password', name: 'password'}) %>
-    <%- include('./partials/form-row.ejs', {type: 'password', name: 'repeat_password', labelText: 'Repeat password'}) %>
+    <%- include('./partials/form-row.ejs', {type: 'text', name: 'fullName', labelText: 'full name', required: true}) %>
+    <%- include('./partials/form-row.ejs', {type: 'text', name: 'location', required: true}) %>
+    <%- include('./partials/form-row.ejs', {type: 'email', name: 'email', required: true}) %>
+    <%- include('./partials/form-row.ejs', {type: 'password', name: 'password', required: true}) %>
+    <%- include('./partials/form-row.ejs', {type: 'password', name: 'repeat_password', labelText: 'Repeat password', required: true}) %>
     <button type="submit" class="btn btn-block">
       submit
     </button>
     <p>
       Already a member?
-      <a class="member-btn" to="/login">Login</a>
+      <a class="member-btn" href="/login">Login</a>
     </p>
   </form>
 </section>
