@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="./assets/css/login.css" />
+<section>
+  <form class="form" action="/login" method="post">
+    <%- include('./partials/logo.ejs') %>
+    <h4>Login</h4>
+    <%- include('./partials/form-row.ejs', {type: 'email', name: 'email', required: true}) %>
+    <%- include('./partials/form-row.ejs', {type: 'password', name: 'password', required: true}) %>
+    <button type="submit" class="btn btn-block">
+      submit
+    </button>
+    <p>
+      Not a member yet?
+      <a class="member-btn" href="/register">
+        Register
+      </a>
+    </p>
+  </form>
+</section>

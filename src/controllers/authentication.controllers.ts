@@ -37,3 +37,7 @@ export const registerLocalUser = async (req: Request<any, any, RegisterReqBody>,
     }
   })
 }
+
+export const loginPage = (req: Request, res: Response) => {
+  res.render(VIEW.DEFAULT_LAYOUT, { child: VIEW.LOGIN_CHILD })
+}

@@ -6,4 +6,5 @@ export default class VIEW {
   static readonly LANDING_CHILD = '../landing'
   static readonly ERROR_CHILD = '../error'
   static readonly REGISTER_CHILD = '../register'
+  static readonly LOGIN_CHILD = '../login'
 }
