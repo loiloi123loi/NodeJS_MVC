@@ -26,17 +26,18 @@ export const registerLocalUser = async (req: Request<any, any, RegisterReqBody>,
       child: VIEW.LANDING_CHILD,
       toast: {
         type: ToastType.SUCCESS,
-        message: USER_MESSAGES.REGISTER_SUCCESS
+        messages: [USER_MESSAGES.REGISTER_SUCCESS]
       }
     })
   }
-  return res.render(VIEW.DEFAULT_LAYOUT, {
-    child: VIEW.LANDING_CHILD,
-    toast: {
+  req.flash(
+    'messages',
+    JSON.stringify({
       type: ToastType.ERROR,
-      message: USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER
-    }
-  })
+      messages: [USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER]
+    })
+  )
+  return res.redirect(PATH.LANDING)
 }
 
 export const loginPage = (req: Request, res: Response) => {
@@ -45,24 +46,40 @@ export const loginPage = (req: Request, res: Response) => {
 
 export const loginLocalUser = async (req: Request<any, any, LoginReqBody>, res: Response) => {
   if (req.validationErrors) {
-    console.log(req.validationErrors)
     return res.render(VIEW.DEFAULT_LAYOUT, {
       child: VIEW.LOGIN_CHILD,
       toast: {
         type: ToastType.ERROR,
-        messages: req.validationErrors
+        messages: [req.validationErrors]
       }
     })
   }
   const result = await userService.loginLocalUser(req.body)
   if (result) {
+    req.session.user = result
+    req.flash(
+      'messages',
+      JSON.stringify({
+        type: ToastType.SUCCESS,
+        messages: [USER_MESSAGES.LOGIN_SUCCESS]
+      })
+    )
     return res.redirect(PATH.DEFAULT_PATH)
+  } else if (result === null) {
+    return res.render(VIEW.DEFAULT_LAYOUT, {
+      child: VIEW.LOGIN_CHILD,
+      toast: {
+        type: ToastType.ERROR,
+        messages: [USER_MESSAGES.EMAIL_OR_PASSWORD_INCORRECT]
+      }
+    })
   }
-  return res.render(VIEW.DEFAULT_LAYOUT, {
-    child: VIEW.LANDING_CHILD,
-    toast: {
+  req.flash(
+    'messages',
+    JSON.stringify({
       type: ToastType.ERROR,
-      message: USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER
-    }
-  })
+      messages: [USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER]
+    })
+  )
+  return res.redirect(PATH.LANDING)
 }

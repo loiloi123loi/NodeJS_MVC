@@ -1,5 +1,7 @@
+import { NextFunction, Request, Response } from 'express'
 import { checkSchema, ParamSchema } from 'express-validator'
 import { USER_MESSAGES } from '~/constants/messages'
+import PATH from '~/constants/path.constants'
 import userService from '~/services/impl/user.services.impl'
 import { validate } from '~/utils/validation'
 
@@ -158,3 +160,16 @@ export const loginValidator = validate(
     ['body']
   )
 )
+
+export const requestFilter = (req: Request, res: Response, next: NextFunction) => {
+  if (req.path === PATH.LANDING) {
+    return next()
+  }
+  if ([PATH.LOGIN, PATH.REGISTER].includes(req.path) && req.session.user) {
+    return res.redirect(PATH.DEFAULT_PATH)
+  }
+  if (![PATH.LOGIN, PATH.REGISTER].includes(req.path) && !req.session.user) {
+    return res.redirect(PATH.LANDING)
+  }
+  next()
+}

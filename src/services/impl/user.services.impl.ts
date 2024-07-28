@@ -1,10 +1,10 @@
 import USER from '~/dao/user.dao'
 import { LoginReqBody, RegisterReqBody } from '~/models/requests/User.requests'
 import UserService from '../user.services'
-import User from '~/models/User.model'
+import User, { IUser } from '~/models/User.model'
 import { LoginProvider } from '~/constants/enums'
 import crypto from 'crypto'
-import { hashPassword } from '~/utils/bcrypt'
+import { comparePassword, hashPassword } from '~/utils/bcrypt'
 
 class UserServiceImpl implements UserService {
   async isEmailExist(email: string) {
@@ -31,15 +31,19 @@ class UserServiceImpl implements UserService {
     }
     return false
   }
-  async loginLocalUser(body: LoginReqBody): Promise<boolean> {
-    const { password } = body
-    const newHashPassword = await hashPassword(password)
+  async loginLocalUser(body: LoginReqBody): Promise<IUser | undefined | null> {
+    const { email, password } = body
     try {
-      return true
+      const user = await USER.findOne({
+        email
+      })
+      if (user) {
+        const isMatch = await comparePassword(password, user.password)
+        return isMatch ? user : null
+      }
     } catch (err) {
       console.log(`UserService.loginLocalUser`, err)
     }
-    return false
   }
 }
 
