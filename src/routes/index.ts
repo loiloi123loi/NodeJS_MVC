@@ -5,7 +5,7 @@ import errorRouter from './error.routes'
 import authenticationRouter from './authentication.routes'
 
 export default function createRouter(app: Express) {
-  app.use(PATH.DEFAULT_PATH, homeRouter)
   app.use(PATH.DEFAULT_PATH, authenticationRouter)
+  app.use(PATH.DEFAULT_PATH, homeRouter)
   app.use(errorRouter)
 }

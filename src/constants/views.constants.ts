@@ -1,6 +1,7 @@
 export default class VIEW {
   // layouts
   static readonly DEFAULT_LAYOUT = 'layouts/default'
+  static readonly HOME_LAYOUT = 'layouts/home'
 
   // child
   static readonly LANDING_CHILD = '../landing'

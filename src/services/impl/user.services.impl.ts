@@ -1,5 +1,5 @@
 import USER from '~/dao/user.dao'
-import { RegisterReqBody } from '~/models/requests/User.requests'
+import { LoginReqBody, RegisterReqBody } from '~/models/requests/User.requests'
 import UserService from '../user.services'
 import User from '~/models/User.model'
 import { LoginProvider } from '~/constants/enums'
@@ -28,6 +28,16 @@ class UserServiceImpl implements UserService {
       return true
     } catch (err) {
       console.log(`UserService.registerLocalUser`, err)
+    }
+    return false
+  }
+  async loginLocalUser(body: LoginReqBody): Promise<boolean> {
+    const { password } = body
+    const newHashPassword = await hashPassword(password)
+    try {
+      return true
+    } catch (err) {
+      console.log(`UserService.loginLocalUser`, err)
     }
     return false
   }

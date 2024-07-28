@@ -123,3 +123,38 @@ export const registerValidator = validate(
     ['body']
   )
 )
+
+export const loginValidator = validate(
+  checkSchema(
+    {
+      email: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.EMAIL_IS_REQUIRED
+        },
+        isEmail: {
+          errorMessage: USER_MESSAGES.EMAIL_IS_INVALID
+        },
+        trim: true,
+        custom: {
+          options: async (value) => {
+            const isExist = await userService.isEmailExist(value)
+            if (!isExist) {
+              throw new Error(USER_MESSAGES.EMAIL_OR_PASSWORD_INCORRECT)
+            }
+            return true
+          }
+        }
+      },
+      password: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.PASSWORD_IS_REQUIRED
+        },
+        isString: {
+          errorMessage: USER_MESSAGES.PASSWORD_MUST_BE_A_STRING
+        },
+        trim: true
+      }
+    },
+    ['body']
+  )
+)
