@@ -35,7 +35,7 @@
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
         }
-        <% _toast.messages.forEach(function(message, index) { %>
+        <% _toast.messages?.forEach(function(message, index) { %>
         setTimeout(function() {
           toastr['<%- _toast.type %>']('<%- message %>');
         }, <%= index * 100 %>);
