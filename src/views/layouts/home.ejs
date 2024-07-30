@@ -12,9 +12,18 @@
 
 <body>
   <div id="root">
-    <% if(child) { %>
-    <%- include(child) %>
-    <% } %>
+    <section>
+      <main class="dashboard">
+        <SmallSidebar />
+        <BigSidebar />
+        <div>
+          <Navbar />
+          <div class="dashboard-page">
+            content
+          </div>
+        </div>
+      </main>
+    </section>
     <% 
       const _toast = typeof toast !== 'undefined' ? toast : undefined
     %>
