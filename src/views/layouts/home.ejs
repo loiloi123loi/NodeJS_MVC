@@ -12,18 +12,65 @@
 
 <body>
   <div id="root">
+    <link rel="stylesheet" href="../assets/css/shared-layout.css" />
     <section>
       <main class="dashboard">
-        <SmallSidebar />
-        <BigSidebar />
+        <aside id="big-sidebar">
+          <%- include('../partials/small-sidebar.ejs') %>
+        </aside>
+        <aside id="small-sidebar">
+          <%- include('../partials/big-sidebar.ejs') %>
+        </aside>
         <div>
-          <Navbar />
+          <%- include('../partials/navbar.ejs') %>
           <div class="dashboard-page">
-            content
+            <% if(child) { %>
+            <%- include(child) %>
+            <% } %>
           </div>
         </div>
       </main>
     </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        function updateSidebar() {
+          const smallSidebar = document.getElementById('small-sidebar');
+          const bigSidebar = document.getElementById('big-sidebar');
+
+          if (window.innerWidth <= 992) {
+            if (!document.getElementById('small-sidebar-css')) {
+              const link = document.createElement('link');
+              link.rel = 'stylesheet';
+              link.href = '../assets/css/small-sidebar.css';
+              link.id = 'small-sidebar-css';
+              document.head.appendChild(link);
+            }
+            const bigSidebarCss = document.getElementById('big-sidebar-css');
+            if (bigSidebarCss) {
+              document.head.removeChild(bigSidebarCss);
+            }
+            smallSidebar.style.display = 'block';
+            bigSidebar.style.display = 'none';
+          } else {
+            if (!document.getElementById('big-sidebar-css')) {
+              const link = document.createElement('link');
+              link.rel = 'stylesheet';
+              link.href = '../assets/css/big-sidebar.css';
+              link.id = 'big-sidebar-css';
+              document.head.appendChild(link);
+            }
+            const smallSidebarCss = document.getElementById('small-sidebar-css');
+            if (smallSidebarCss) {
+              document.head.removeChild(smallSidebarCss);
+            }
+            smallSidebar.style.display = 'none';
+            bigSidebar.style.display = 'block';
+          }
+        }
+        updateSidebar();
+        window.addEventListener('resize', updateSidebar);
+      });
+    </script>
     <% 
       const _toast = typeof toast !== 'undefined' ? toast : undefined
     %>
