@@ -1,1 +1,12 @@
-small
+<aside>
+  <div class="sidebar-container show-sidebar">
+    <div class="content">
+      <button type="button" class="close-btn">
+      </button>
+      <header>
+        <%- include('./logo.ejs') %>
+      </header>
+      <NavLinks toggleSidebar={toggle} currentPath="/dashboard" />
+    </div>
+  </div>
+</aside>

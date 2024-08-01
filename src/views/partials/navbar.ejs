@@ -1,1 +1,29 @@
-nav
+<link rel="stylesheet" href="../assets/css/navbar.css" />
+<nav>
+  <div class="nav-center">
+    <button type="button" class="toggle-btn" onClick={toggle}>
+      <FaAlignLeft />
+    </button>
+    <div>
+      <Logo />
+      <h4 class="logo-text">dashboard</h4>
+    </div>
+    <div class="btn-container">
+      <button class="dark-btn">
+        <BsFillMoonFill class="toggle-icon" />
+      </button>
+      <div class="container-logout">
+        <button type="button" class="btn">
+          <img class="img" src='avatar' alt="avatar" />
+          loi
+          <FaCaretDown />
+        </button>
+        <div class="dropdown show-dropdown">
+          <button type="button" class="dropdown-btn">
+            logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
