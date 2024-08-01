@@ -34,3 +34,5 @@ export const dashboardPage = (req: Request, res: Response) => {
     child: '../dashboard/add-job.ejs'
   })
 }
+
+export const getProfilePage = (req: Request, res: Response) => {}
