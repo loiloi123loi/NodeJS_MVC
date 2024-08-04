@@ -19,6 +19,7 @@ export const USER_MESSAGES = {
   REPEAT_PASSWORD_MUST_BE_THE_SAME_AS_PASSWORD: 'Repeat password must be the same as password',
   REGISTER_SUCCESS: 'User registered successfully',
   LOGIN_SUCCESS: 'Login successful',
+  LOGOUT_SUCCESS: 'Logout successful',
   EMAIL_OR_PASSWORD_INCORRECT: 'Email or password incorrect',
   SOMETHING_WAS_WRONG_TRY_AGAIN_LATER: 'Something went wrong, try again later'
 } as const

@@ -24,6 +24,7 @@ export const dashboardPage = (req: Request, res: Response) => {
     const { messages, type } = JSON.parse(str)
     return res.render(VIEW.HOME_LAYOUT, {
       child: '../dashboard/add-job.ejs',
+      user: req.session.user,
       toast: {
         type,
         messages
@@ -31,7 +32,8 @@ export const dashboardPage = (req: Request, res: Response) => {
     })
   }
   res.render(VIEW.HOME_LAYOUT, {
-    child: '../dashboard/add-job.ejs'
+    child: '../dashboard/add-job.ejs',
+    user: req.session.user
   })
 }
 
