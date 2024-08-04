@@ -1,10 +1,11 @@
-import USER from '~/dao/user.dao'
-import { LoginReqBody, RegisterReqBody } from '~/models/requests/User.requests'
-import UserService from '../user.services'
-import User, { IUser } from '~/models/User.model'
-import { LoginProvider } from '~/constants/enums'
 import crypto from 'crypto'
+import { LoginProvider, UserRole } from '~/constants/enums'
+import USER from '~/dao/user.dao'
+import USER_ROLE from '~/dao/userRole.dao'
+import { LoginReqBody, RegisterReqBody } from '~/models/requests/User.requests'
+import User, { IUser } from '~/models/User.model'
 import { comparePassword, hashPassword } from '~/utils/bcrypt'
+import UserService from '../user.services'
 
 class UserServiceImpl implements UserService {
   async isEmailExist(email: string) {
@@ -25,6 +26,15 @@ class UserServiceImpl implements UserService {
           activeTokenExp: new Date(Date.now() + 3600 * 1000)
         })
       )
+      const user = await USER.findOne({
+        email: body.email
+      })
+      if (user) {
+        await USER_ROLE.create({
+          user_id: user.id,
+          roles: UserRole.USER
+        })
+      }
       return true
     } catch (err) {
       console.log(`UserService.registerLocalUser`, err)

@@ -1,4 +1,4 @@
-import { LoginProvider } from '~/constants/enums'
+import { LoginProvider, UserRole } from '~/constants/enums'
 
 export interface IUser {
   id?: number
@@ -7,10 +7,11 @@ export interface IUser {
   email: string
   password: string
   verified: boolean
-  provider: number
+  provider: LoginProvider
   activeToken: string
   activeTokenExp?: Date
   forgotPasswordToken?: string
+  role?: UserRole[]
   updated_at?: Date
   created_at?: Date
 }
@@ -22,7 +23,7 @@ export default class User {
   email: string
   password: string
   verified: boolean
-  provider: number
+  provider: LoginProvider
   activeToken: string
   activeTokenExp: Date
   forgotPasswordToken: string

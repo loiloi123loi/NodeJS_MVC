@@ -173,3 +173,10 @@ export const requestFilter = (req: Request, res: Response, next: NextFunction) =
   }
   next()
 }
+
+export const logoutValidator = (req: Request, res: Response, next: NextFunction) => {
+  if (req.session.user) {
+    return next()
+  }
+  return res.redirect(PATH.DEFAULT_PATH)
+}
