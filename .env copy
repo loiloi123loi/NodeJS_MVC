@@ -9,3 +9,4 @@ DB_USER = ''
 DB_PASSWORD = ''
 
 USER_TABLE = ''
+USER_ROLES_TABLE = ''
