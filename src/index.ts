@@ -4,9 +4,11 @@ import path from 'path'
 import createRouter from './routes'
 import session from 'express-session'
 import flash from 'connect-flash'
+import methodOverride from 'method-override'
 import express from 'express'
 const app = express()
 
+app.use(methodOverride('_method'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))

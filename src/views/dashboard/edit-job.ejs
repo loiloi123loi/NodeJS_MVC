@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="../assets/css/edit-job.css" />
+<% 
+  const jobStatusOptions = ['pending', 'interview', 'declined'];
+  const jobTypeOptions = ['full-time', 'part-time', 'internship'];
+  const job = {
+    id: 1,
+    position: 'Software Engineer',
+    company: 'XYZ Corp',
+    jobLocation: 'New York, USA',
+    status: 'interview',
+    jobType: 'internship'
+  }
+%>
+<section>
+  <form class="form" method="POST" action="/edit-job/<%- job.id %>?_method=PATCH">
+    <h4 class="form-title">edit job</h4>
+    <div class="form-center">
+      <%- include('../partials/form-row.ejs', {type: 'text', name: 'position', required: true, value: job.position}) %>
+      <%- include('../partials/form-row.ejs', {type: 'text', name: 'company', required: true, value: job.company}) %>
+      <%- include('../partials/form-row.ejs', {type: 'text', name: 'jobLocation', labelText:"job location", required: true, value: job.jobLocation}) %>
+      <%- include('../partials/form-row-select.ejs', {name: 'status', labelText: 'job status', list: jobStatusOptions, value: job.status}) %>
+      <%- include('../partials/form-row-select.ejs', {name: 'jobType', labelText: 'job type', list: jobTypeOptions, value: job.jobType}) %>
+      <button type="submit" class="btn btn-block submit-btn">
+        submit
+      </button>
+    </div>
+  </form>
+</section>

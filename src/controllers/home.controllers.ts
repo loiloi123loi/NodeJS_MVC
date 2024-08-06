@@ -39,4 +39,25 @@ export const dashboardPage = (req: Request, res: Response) => {
 
 export const createJob = (req: Request, res: Response) => {}
 
-export const getEditJobPage = (req: Request, res: Response) => {}
+export const getEditJobPage = (req: Request, res: Response) => {
+  const [str] = req.flash('messages')
+  if (str) {
+    const { messages, type } = JSON.parse(str)
+    return res.render(VIEW.HOME_LAYOUT, {
+      child: VIEW.EDIT_JOB_CHILD,
+      user: req.session.user,
+      toast: {
+        type,
+        messages
+      }
+    })
+  }
+  res.render(VIEW.HOME_LAYOUT, {
+    child: VIEW.EDIT_JOB_CHILD,
+    user: req.session.user
+  })
+}
+
+export const updateJob = (req: Request, res: Response) => {
+  console.log(req.body)
+}

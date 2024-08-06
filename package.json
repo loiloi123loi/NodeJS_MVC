@@ -36,6 +36,7 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@types/method-override": "^0.0.35",
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.4.5",
@@ -43,6 +44,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
+    "method-override": "^3.0.0",
     "mysql2": "^3.10.2"
   }
 }
