@@ -1,0 +1,13 @@
+<div class="form-row">
+  <% 
+    const _labelText = typeof labelText !== 'undefined' ? labelText : name
+  %>
+  <label class="form-label">
+    <%= _labelText %>
+  </label>
+  <select name=<%= name %> id=<%= name %> class="form-select">
+    <% list?.forEach(item => { %>
+    <option value="<%= item %>"><%= item %></option>
+    <% }); %>
+  </select>
+</div>

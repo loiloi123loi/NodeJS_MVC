@@ -5,4 +5,5 @@ export default class PATH {
   static readonly REGISTER = '/register'
   static readonly LOGIN = '/login'
   static readonly LOGOUT = '/logout'
+  static readonly ALL_JOBS = '/all-jobs'
 }
