@@ -6,4 +6,5 @@ export default class PATH {
   static readonly LOGIN = '/login'
   static readonly LOGOUT = '/logout'
   static readonly EDIT_JOB = '/edit-job/:id'
+  static readonly ALL_JOBS = '/all-jobs'
 }

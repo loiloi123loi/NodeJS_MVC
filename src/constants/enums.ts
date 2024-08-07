@@ -13,3 +13,15 @@ export enum UserRole {
   ADMIN = 'ADMIN',
   USER = 'USER'
 }
+
+export enum JobStatusEnum {
+  PENDING = 'pending',
+  INTERVIEW = 'interview',
+  DECLINED = 'declined'
+}
+
+export enum JobTypeEnum {
+  FULL_TIME = 'full-time',
+  PART_TIME = 'part-time',
+  INTERNSHIP = 'internship'
+}

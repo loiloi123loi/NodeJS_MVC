@@ -2,14 +2,6 @@
 <% 
   const jobStatusOptions = ['pending', 'interview', 'declined'];
   const jobTypeOptions = ['full-time', 'part-time', 'internship'];
-  const job = {
-    id: 1,
-    position: 'Software Engineer',
-    company: 'XYZ Corp',
-    jobLocation: 'New York, USA',
-    status: 'interview',
-    jobType: 'internship'
-  }
 %>
 <section>
   <form class="form" method="POST" action="/edit-job/<%- job.id %>?_method=PATCH">

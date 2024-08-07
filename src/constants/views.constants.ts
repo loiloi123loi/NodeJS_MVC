@@ -9,4 +9,5 @@ export default class VIEW {
   static readonly REGISTER_CHILD = '../register'
   static readonly LOGIN_CHILD = '../login'
   static readonly EDIT_JOB_CHILD = '../dashboard/edit-job'
+  static readonly ADD_JOB_CHILD = '../dashboard/add-job'
 }
