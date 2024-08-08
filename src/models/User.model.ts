@@ -1,4 +1,4 @@
-import { LoginProvider } from '~/constants/enums'
+import { LoginProvider, UserRole } from '~/constants/enums'
 
 export interface IUser {
   id?: number
@@ -7,10 +7,12 @@ export interface IUser {
   email: string
   password: string
   verified: boolean
-  provider: number
+  provider: LoginProvider
+  avatar?: string
   activeToken: string
   activeTokenExp?: Date
   forgotPasswordToken?: string
+  role?: UserRole[]
   updated_at?: Date
   created_at?: Date
 }
@@ -22,7 +24,8 @@ export default class User {
   email: string
   password: string
   verified: boolean
-  provider: number
+  provider: LoginProvider
+  avatar?: string
   activeToken: string
   activeTokenExp: Date
   forgotPasswordToken: string
@@ -37,6 +40,7 @@ export default class User {
     password,
     verified,
     provider,
+    avatar,
     activeToken,
     activeTokenExp,
     forgotPasswordToken,
@@ -52,6 +56,7 @@ export default class User {
     this.verified = verified
     this.provider = provider
     this.activeToken = activeToken
+    this.avatar = avatar || ''
     this.activeTokenExp = activeTokenExp || new Date(now.getTime() + 60 * 60 * 1000)
     this.forgotPasswordToken = forgotPasswordToken || ''
     this.updated_at = updated_at || now

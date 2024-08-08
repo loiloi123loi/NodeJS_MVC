@@ -8,4 +8,6 @@ export default class VIEW {
   static readonly ERROR_CHILD = '../error'
   static readonly REGISTER_CHILD = '../register'
   static readonly LOGIN_CHILD = '../login'
+  static readonly ADD_JOB_CHILD = '../dashboard/add-job'
+  static readonly PROFILE_CHILD = '../dashboard/profile'
 }

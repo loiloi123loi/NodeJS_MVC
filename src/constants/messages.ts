@@ -19,6 +19,23 @@ export const USER_MESSAGES = {
   REPEAT_PASSWORD_MUST_BE_THE_SAME_AS_PASSWORD: 'Repeat password must be the same as password',
   REGISTER_SUCCESS: 'User registered successfully',
   LOGIN_SUCCESS: 'Login successful',
+  LOGOUT_SUCCESS: 'Logout successful',
   EMAIL_OR_PASSWORD_INCORRECT: 'Email or password incorrect',
-  SOMETHING_WAS_WRONG_TRY_AGAIN_LATER: 'Something went wrong, try again later'
+  SOMETHING_WAS_WRONG_TRY_AGAIN_LATER: 'Something went wrong, try again later',
+
+  // ADDJOB
+  JOB_POSITION_IS_REQUIRED: 'Job position is required',
+  JOB_POSITION_MUST_BE_A_STRING: 'Job position must be a string',
+  JOB_COMPANY_IS_REQUIRED: 'Job company is required',
+  JOB_COMPANY_MUST_BE_A_STRING: 'Job company must be a string',
+  JOB_LOCATION_IS_REQUIRED: 'Job location is required',
+  JOB_LOCATION_MUST_BE_A_STRING: 'Job location must be a string',
+  JOB_STATUS_IS_REQUIRED: 'Job status is required',
+  JOB_STATUS_MUST_BE_A_STRING: 'Job status must be a string',
+  JOB_TYPE_IS_REQUIRED: 'Job type is required',
+  JOB_TYPE_MUST_BE_A_STRING: 'Job type must be a string',
+  CREATE_JOB_SUCCESS: 'Create job succeessfully',
+
+  // PROFILE
+  PROFILE_UPDATE_SUCCESS: 'Profile update successfully'
 } as const

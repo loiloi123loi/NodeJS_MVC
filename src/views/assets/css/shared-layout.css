@@ -1,4 +1,4 @@
-section {
+.home-layout {
   .dashboard {
     display: grid;
     grid-template-columns: 1fr;
