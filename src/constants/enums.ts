@@ -15,13 +15,22 @@ export enum UserRole {
 }
 
 export enum JobStatusEnum {
+  ALL = '',
   PENDING = 'pending',
   INTERVIEW = 'interview',
   DECLINED = 'declined'
 }
 
 export enum JobTypeEnum {
+  ALL = '',
   FULL_TIME = 'full-time',
   PART_TIME = 'part-time',
   INTERNSHIP = 'internship'
+}
+
+export enum SortTypeEnum {
+  NEWEST = 'newest',
+  OLDEST = 'oldest',
+  A_Z = 'a-z',
+  Z_A = 'z-a'
 }

@@ -54,3 +54,76 @@ export const createJobValidator = validate(
     ['body']
   )
 )
+
+export const getAllJobsValidator = validate(
+  checkSchema(
+    {
+      search: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      searchStatus: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      searchType: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      sort: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      limit: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      page: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      }
+    },
+    ['query']
+  )
+)
+
+export const deleteJobValidator = validate(
+  checkSchema(
+    {
+      job_id: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.JOB_ID_IS_REQUIRED
+        },
+        isNumeric: {
+          errorMessage: USER_MESSAGES.JOB_ID_MUST_BE_NUMER
+        },
+        trim: true
+      }
+    },
+    ['params']
+  )
+)

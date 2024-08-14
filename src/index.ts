@@ -11,7 +11,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use('/assets', express.static(path.join(__dirname, 'views/assets')))
+app.use(['/*/assets', '/assets'], express.static(path.join(__dirname, 'views/assets')))
 app.use(
   session({
     secret: process.env.SESSION_SECRET as string,
