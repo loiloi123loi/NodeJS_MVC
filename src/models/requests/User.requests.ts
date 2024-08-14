@@ -1,3 +1,5 @@
+import { JobStatusEnum, JobTypeEnum } from '~/constants/enums'
+
 export interface RegisterReqBody {
   fullName: string
   location: string
@@ -9,4 +11,12 @@ export interface RegisterReqBody {
 export interface LoginReqBody {
   email: string
   password: string
+}
+
+export interface CreateJobReqBody {
+  position: string
+  company: string
+  jobLocation: string
+  status: JobStatusEnum
+  jobType: JobTypeEnum
 }

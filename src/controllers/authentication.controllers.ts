@@ -83,3 +83,17 @@ export const loginLocalUser = async (req: Request<any, any, LoginReqBody>, res: 
   )
   return res.redirect(PATH.LANDING)
 }
+
+export const logoutUser = async (req: Request<any, any, LoginReqBody>, res: Response) => {
+  req.session.user = undefined
+  req.flash(
+    'messages',
+    JSON.stringify({
+      type: ToastType.SUCCESS,
+      messages: [USER_MESSAGES.LOGOUT_SUCCESS]
+    })
+  )
+  return res.json({
+    msg: USER_MESSAGES.LOGOUT_SUCCESS
+  })
+}
