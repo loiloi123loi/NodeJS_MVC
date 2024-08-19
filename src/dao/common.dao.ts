@@ -30,7 +30,10 @@ export default class CommonDAO<T> {
     const entries = Object.entries(data)
     const whereClause = entries.map(([key]) => `${key} = ?`).join(' AND ')
     const values = entries.map(([_, value]) => value)
-    const [result] = (await pool.execute(`SELECT * FROM ${this.tableName} WHERE ${whereClause}`, values)) as [T[], any]
+    const [result] = (await pool.execute(
+      `SELECT * FROM ${this.tableName} ${whereClause ? 'WHERE' : ''} ${whereClause}`,
+      values
+    )) as [T[], any]
     return result.length > 0 ? result : undefined
   }
 }

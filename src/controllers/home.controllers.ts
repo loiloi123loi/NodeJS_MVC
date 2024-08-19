@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { ToastType } from '~/constants/enums'
+import { ToastType, UserRole } from '~/constants/enums'
 import { USER_MESSAGES } from '~/constants/messages'
 import PATH from '~/constants/path.constants'
 import VIEW from '~/constants/views.constants'
@@ -73,4 +73,37 @@ export const createJob = async (req: Request<any, any, CreateJobReqBody>, res: R
     })
   )
   return res.redirect(PATH.DEFAULT_PATH)
+}
+
+export const getAdminPage = async (req: Request, res: Response) => {
+  if (req.session.user && req.session.user.role?.includes(UserRole.ADMIN)) {
+    const [str] = req.flash('messages')
+    const { totalUsers, totalJobs } = await jobService.getDashboardInfo(Number(req.session.user))
+    if (str) {
+      const { messages, type } = JSON.parse(str)
+      return res.render(VIEW.HOME_LAYOUT, {
+        child: VIEW.ADMIN_CHILD,
+        user: req.session.user,
+        info: { totalUsers, totalJobs },
+        toast: {
+          type,
+          messages
+        }
+      })
+    }
+    return res.render(VIEW.HOME_LAYOUT, {
+      child: VIEW.ADMIN_CHILD,
+      user: req.session.user,
+      info: { totalUsers, totalJobs }
+    })
+  }
+  res.render(VIEW.HOME_LAYOUT, {
+    child: VIEW.ADMIN_CHILD,
+    user: req.session.user,
+    info: { totalUsers: 0, totalJobs: 0 },
+    toast: {
+      type: ToastType.ERROR,
+      messages: [USER_MESSAGES.NOT_HAVE_PERMISSION]
+    }
+  })
 }

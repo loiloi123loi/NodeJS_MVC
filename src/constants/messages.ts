@@ -34,5 +34,8 @@ export const USER_MESSAGES = {
   JOB_STATUS_MUST_BE_A_STRING: 'Job status must be a string',
   JOB_TYPE_IS_REQUIRED: 'Job type is required',
   JOB_TYPE_MUST_BE_A_STRING: 'Job type must be a string',
-  CREATE_JOB_SUCCESS: 'Create job succeessfully'
+  CREATE_JOB_SUCCESS: 'Create job succeessfully',
+
+  // ADMIN
+  NOT_HAVE_PERMISSION: 'You do not have permission to access this site'
 } as const
