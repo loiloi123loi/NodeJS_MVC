@@ -26,11 +26,22 @@ export default class CommonDAO<T> {
     return result.length > 0 ? result[0] : undefined
   }
 
-  async findAll(data: Partial<T>): Promise<T[] | undefined> {
+  async findAll(
+    data: Partial<T>,
+    groupBy?: { columns: string[] },
+    sortBy?: { columns: string[]; order: 'ASC' | 'DESC' },
+    select?: { columns: string[] }
+  ): Promise<any[]> {
     const entries = Object.entries(data)
     const whereClause = entries.map(([key]) => `${key} = ?`).join(' AND ')
     const values = entries.map(([_, value]) => value)
-    const [result] = (await pool.execute(`SELECT * FROM ${this.tableName} WHERE ${whereClause}`, values)) as [T[], any]
-    return result.length > 0 ? result : undefined
+    const groupByClause = groupBy ? `GROUP BY ${groupBy.columns?.join(', ')}` : ''
+    const sortByClause = sortBy ? `ORDER BY ${sortBy.columns?.join(', ')} ${sortBy.order}` : ''
+    const sql = `SELECT ${select ? select.columns?.join(', ') : '*'} FROM ${this.tableName} WHERE ${whereClause} ${groupByClause} ${sortByClause}`
+    if (Boolean(process.env.SHOW_SQL) === true) {
+      console.log(sql, values)
+    }
+    const [result] = (await pool.execute(sql, values)) as [any[], any]
+    return result.length > 0 ? result : []
   }
 }
