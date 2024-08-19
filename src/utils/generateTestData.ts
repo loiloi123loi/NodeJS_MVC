@@ -50,6 +50,14 @@ const companies = [
 
 const location = ['Hồ Chí Minh', 'Đà Nẵng', 'Huế', 'Quy Nhơn', 'Hà Nội']
 
+const getRandomDateInYear = (year: number = 2024) => {
+  const start = new Date(year, 0, 1)
+  const end = new Date(year, 11, 31)
+
+  const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  return new Date(randomTime)
+}
+
 const getRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
@@ -60,12 +68,15 @@ const generate = async (num: number = 200) => {
     arr.map(async (id) => {
       const rd1 = getRandomNumber(0, 2)
       const rd2 = getRandomNumber(0, 2)
-      const job: CreateJobReqBody = {
+      const rdDate = getRandomDateInYear()
+      const job: CreateJobReqBody & { created_at: Date; updated_at: Date } = {
         position: jobPositions[getRandomNumber(0, jobPositions.length - 1)],
         company: companies[getRandomNumber(0, companies.length - 1)],
         jobLocation: location[getRandomNumber(0, location.length - 1)],
         status: rd1 === 0 ? JobStatusEnum.DECLINED : rd1 === 1 ? JobStatusEnum.INTERVIEW : JobStatusEnum.PENDING,
-        jobType: rd2 === 0 ? JobTypeEnum.FULL_TIME : rd1 === 1 ? JobTypeEnum.INTERNSHIP : JobTypeEnum.PART_TIME
+        jobType: rd2 === 0 ? JobTypeEnum.FULL_TIME : rd1 === 1 ? JobTypeEnum.INTERNSHIP : JobTypeEnum.PART_TIME,
+        created_at: rdDate,
+        updated_at: rdDate
       }
       const result = await jobService.createJob(9, job)
       if (result) {
