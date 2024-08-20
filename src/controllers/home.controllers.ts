@@ -6,7 +6,6 @@ import VIEW from '~/constants/views.constants'
 import { CreateJobReqBody, UpdateProfileReqBody } from '~/models/requests/User.requests'
 import jobService from '~/services/impl/job.services.impl'
 import userService from '~/services/impl/user.services.impl'
-import upload from '~/utils/multer'
 
 export const landingPage = (req: Request, res: Response) => {
   const [str] = req.flash('messages')
@@ -109,7 +108,6 @@ export const updateProfile = async (req: Request<any, any, UpdateProfileReqBody>
     return res.redirect(PATH.PROFILE)
   }
   if (req.session.user?.id) {
-    upload.single('avatar')
     const user = await userService.updateProfile(req.session.user.id, { ...req.body, avatar: req.file })
     if (user) {
       req.session.user = user
