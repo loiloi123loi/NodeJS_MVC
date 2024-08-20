@@ -20,3 +20,10 @@ export interface CreateJobReqBody {
   status: JobStatusEnum
   jobType: JobTypeEnum
 }
+
+export interface UpdateProfileReqBody {
+  avatar?: Express.Multer.File
+  fullName: string
+  location: string
+  email?: string
+}

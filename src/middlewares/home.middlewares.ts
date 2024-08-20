@@ -54,3 +54,43 @@ export const createJobValidator = validate(
     ['body']
   )
 )
+
+export const updateProfileValidator = validate(
+  checkSchema(
+    {
+      fullName: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.FULLNAME_IS_REQUIRED
+        },
+        isString: {
+          errorMessage: USER_MESSAGES.FULLNAME_MUST_BE_A_STRING
+        },
+        trim: true,
+        isLength: {
+          options: {
+            min: 1,
+            max: 30
+          },
+          errorMessage: USER_MESSAGES.FULLNAME_LENGTH_MUST_BE_FROM_1_TO_30
+        }
+      },
+      location: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.LOCATION_IS_REQUIRED
+        },
+        isString: {
+          errorMessage: USER_MESSAGES.LOCATION_MUST_BE_A_STRING
+        },
+        trim: true,
+        isLength: {
+          options: {
+            min: 1,
+            max: 30
+          },
+          errorMessage: USER_MESSAGES.LOCATION_LENGTH_MUST_BE_FROM_1_TO_30
+        }
+      }
+    },
+    ['body']
+  )
+)

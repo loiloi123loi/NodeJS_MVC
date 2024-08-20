@@ -8,6 +8,7 @@ export interface IUser {
   password: string
   verified: boolean
   provider: LoginProvider
+  avatar?: string
   activeToken: string
   activeTokenExp?: Date
   forgotPasswordToken?: string
@@ -24,6 +25,7 @@ export default class User {
   password: string
   verified: boolean
   provider: LoginProvider
+  avatar?: string
   activeToken: string
   activeTokenExp: Date
   forgotPasswordToken: string
@@ -38,6 +40,7 @@ export default class User {
     password,
     verified,
     provider,
+    avatar,
     activeToken,
     activeTokenExp,
     forgotPasswordToken,
@@ -53,6 +56,7 @@ export default class User {
     this.verified = verified
     this.provider = provider
     this.activeToken = activeToken
+    this.avatar = avatar || ''
     this.activeTokenExp = activeTokenExp || new Date(now.getTime() + 60 * 60 * 1000)
     this.forgotPasswordToken = forgotPasswordToken || ''
     this.updated_at = updated_at || now
