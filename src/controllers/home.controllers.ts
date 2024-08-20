@@ -3,7 +3,12 @@ import { ToastType } from '~/constants/enums'
 import { USER_MESSAGES } from '~/constants/messages'
 import PATH from '~/constants/path.constants'
 import VIEW from '~/constants/views.constants'
-import { CreateJobReqBody, UpdateProfileReqBody } from '~/models/requests/User.requests'
+import {
+  CreateJobReqBody,
+  DeleteJobReqParams,
+  GetAllJobsReqQuery,
+  UpdateProfileReqBody
+} from '~/models/requests/User.requests'
 import jobService from '~/services/impl/job.services.impl'
 import userService from '~/services/impl/user.services.impl'
 
@@ -45,14 +50,14 @@ export const dashboardPage = (req: Request, res: Response) => {
 
 export const createJob = async (req: Request<any, any, CreateJobReqBody>, res: Response) => {
   if (req.validationErrors) {
-    req.flash(
-      'messages',
-      JSON.stringify({
+    return res.render(VIEW.HOME_LAYOUT, {
+      child: VIEW.ADD_JOB_CHILD,
+      user: req.session.user,
+      toast: {
         type: ToastType.ERROR,
         messages: [req.validationErrors]
-      })
-    )
-    return res.redirect(PATH.DEFAULT_PATH)
+      }
+    })
   }
   if (req.session.user?.id) {
     const result = await jobService.createJob(req.session.user?.id, req.body)
@@ -75,6 +80,90 @@ export const createJob = async (req: Request<any, any, CreateJobReqBody>, res: R
     })
   )
   return res.redirect(PATH.DEFAULT_PATH)
+}
+
+export const getAllJobsPage = async (req: Request<any, any, any, GetAllJobsReqQuery>, res: Response) => {
+  if (req.validationErrors) {
+    return res.render(VIEW.HOME_LAYOUT, {
+      child: VIEW.ALL_JOBS_CHILD,
+      user: req.session.user,
+      job: req.query,
+      data: [],
+      toast: {
+        type: ToastType.ERROR,
+        messages: req.validationErrors
+      }
+    })
+  }
+  if (req.session.user) {
+    const result = await jobService.getAllJobs(Number(req.session.user.id), req.query)
+    if (result) {
+      const [str] = req.flash('messages')
+      if (str) {
+        const { messages, type } = JSON.parse(str)
+        return res.render(VIEW.HOME_LAYOUT, {
+          child: VIEW.ALL_JOBS_CHILD,
+          user: req.session.user,
+          job: req.query,
+          data: result,
+          toast: {
+            type,
+            messages
+          }
+        })
+      }
+      return res.render(VIEW.HOME_LAYOUT, {
+        child: VIEW.ALL_JOBS_CHILD,
+        user: req.session.user,
+        job: req.query,
+        data: result,
+        toast: {
+          type: ToastType.ERROR,
+          messages: req.validationErrors
+        }
+      })
+    }
+  }
+  res.render(VIEW.HOME_LAYOUT, {
+    child: VIEW.ALL_JOBS_CHILD,
+    user: req.session.user,
+    job: req.query,
+    data: []
+  })
+}
+
+export const deleteJob = async (req: Request<DeleteJobReqParams>, res: Response) => {
+  if (req.validationErrors) {
+    req.flash(
+      'messages',
+      JSON.stringify({
+        type: ToastType.ERROR,
+        messages: req.validationErrors
+      })
+    )
+    return res.json()
+  }
+  if (req.session.user) {
+    const result = await jobService.deleteJob(Number(req.session.user.id), Number(req.params.job_id))
+    if (result) {
+      req.flash(
+        'messages',
+        JSON.stringify({
+          type: ToastType.SUCCESS,
+          messages: [USER_MESSAGES.DELETE_JOB_SUCCESS]
+        })
+      )
+      return res.json()
+    }
+  }
+  req.flash(
+    'messages',
+    JSON.stringify({
+      type: ToastType.ERROR,
+      messages: [USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER]
+    })
+  )
+  res.json()
 }
 
 export const getProfilePage = (req: Request, res: Response) => {

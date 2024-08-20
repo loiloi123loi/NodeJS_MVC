@@ -1,6 +1,7 @@
 PORT = 
 NODE_ENV = ''
 SESSION_SECRET = ''
+SHOW_SQL = 
 
 DB_HOST = ''
 DB_PORT = 

@@ -36,6 +36,11 @@ export const USER_MESSAGES = {
   JOB_TYPE_MUST_BE_A_STRING: 'Job type must be a string',
   CREATE_JOB_SUCCESS: 'Create job succeessfully',
 
+  // DELETEJOB
+  JOB_ID_IS_REQUIRED: 'Job ID is required',
+  JOB_ID_MUST_BE_NUMER: 'Job ID must be a number',
+  DELETE_JOB_SUCCESS: 'Delete job successfully',
+
   // PROFILE
   PROFILE_UPDATE_SUCCESS: 'Profile update successfully'
 } as const
