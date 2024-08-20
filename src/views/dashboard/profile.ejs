@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../assets/css/dashboard-form-page.css" />
-<form class="form-group" action="/profile?_method=PATCH" method="POST" enctype="multipart/form-data">
+<form class="add-job-container" action="/profile?_method=PATCH" method="POST" enctype="multipart/form-data">
   <h4 class="form-title">profile</h4>
   <div class="form-center">
     <%- include('../partials/form-row.ejs', {type: 'file', name: 'avatar', labelText:"Select An Image File (Max 0.5 MB)", accept:"image/*"}) %>
