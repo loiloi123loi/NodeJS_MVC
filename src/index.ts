@@ -4,14 +4,17 @@ import path from 'path'
 import createRouter from './routes'
 import session from 'express-session'
 import flash from 'connect-flash'
+import methodOverride from 'method-override'
 import express from 'express'
 const app = express()
 
+app.use(methodOverride('_method'))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(['/*/assets', '/assets'], express.static(path.join(__dirname, 'views/assets')))
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')))
 app.use(
   session({
     secret: process.env.SESSION_SECRET as string,

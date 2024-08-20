@@ -35,3 +35,9 @@ export interface GetAllJobsReqQuery extends ParsedQs {
 export interface DeleteJobReqParams extends ParamsDictionary {
   job_id: string
 }
+export interface UpdateProfileReqBody {
+  avatar?: Express.Multer.File
+  fullName: string
+  location: string
+  email?: string
+}

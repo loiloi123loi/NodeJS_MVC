@@ -39,5 +39,8 @@ export const USER_MESSAGES = {
   // DELETEJOB
   JOB_ID_IS_REQUIRED: 'Job ID is required',
   JOB_ID_MUST_BE_NUMER: 'Job ID must be a number',
-  DELETE_JOB_SUCCESS: 'Delete job successfully'
+  DELETE_JOB_SUCCESS: 'Delete job successfully',
+
+  // PROFILE
+  PROFILE_UPDATE_SUCCESS: 'Profile update successfully'
 } as const
