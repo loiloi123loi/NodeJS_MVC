@@ -54,3 +54,116 @@ export const createJobValidator = validate(
     ['body']
   )
 )
+
+export const getAllJobsValidator = validate(
+  checkSchema(
+    {
+      search: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      searchStatus: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      searchType: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      sort: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      limit: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      },
+      page: {
+        trim: true,
+        optional: {
+          options: {
+            nullable: true
+          }
+        }
+      }
+    },
+    ['query']
+  )
+)
+
+export const deleteJobValidator = validate(
+  checkSchema(
+    {
+      job_id: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.JOB_ID_IS_REQUIRED
+        },
+        isNumeric: {
+          errorMessage: USER_MESSAGES.JOB_ID_MUST_BE_NUMER
+        },
+        trim: true
+      }
+    },
+    ['params']
+  )
+)
+
+export const updateProfileValidator = validate(
+  checkSchema(
+    {
+      fullName: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.FULLNAME_IS_REQUIRED
+        },
+        isString: {
+          errorMessage: USER_MESSAGES.FULLNAME_MUST_BE_A_STRING
+        },
+        trim: true,
+        isLength: {
+          options: {
+            min: 1,
+            max: 30
+          },
+          errorMessage: USER_MESSAGES.FULLNAME_LENGTH_MUST_BE_FROM_1_TO_30
+        }
+      },
+      location: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.LOCATION_IS_REQUIRED
+        },
+        isString: {
+          errorMessage: USER_MESSAGES.LOCATION_MUST_BE_A_STRING
+        },
+        trim: true,
+        isLength: {
+          options: {
+            min: 1,
+            max: 30
+          },
+          errorMessage: USER_MESSAGES.LOCATION_LENGTH_MUST_BE_FROM_1_TO_30
+        }
+      }
+    },
+    ['body']
+  )
+)

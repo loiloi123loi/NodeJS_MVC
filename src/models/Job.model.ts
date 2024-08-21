@@ -1,6 +1,7 @@
 import { JobStatusEnum, JobTypeEnum } from '~/constants/enums'
 
 export interface IJob {
+  id?: number
   position: string
   company: string
   jobLocation: string
@@ -12,6 +13,7 @@ export interface IJob {
 }
 
 export default class JobModel {
+  id?: number
   position: string
   company: string
   jobLocation: string
@@ -21,8 +23,9 @@ export default class JobModel {
   created_at: Date
   updated_at: Date
 
-  constructor({ position, company, jobLocation, status, jobType, created_by, created_at, updated_at }: IJob) {
+  constructor({ id, position, company, jobLocation, status, jobType, created_by, created_at, updated_at }: IJob) {
     const now = new Date()
+    this.id = id || undefined
     this.position = position
     this.company = company
     this.jobLocation = jobLocation
