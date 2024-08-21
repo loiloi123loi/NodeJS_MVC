@@ -82,6 +82,31 @@ export const createJob = async (req: Request<any, any, CreateJobReqBody>, res: R
   return res.redirect(PATH.DEFAULT_PATH)
 }
 
+export const getStatsPage = async (req: Request, res: Response) => {
+  if (req.session.user?.id) {
+    const result = await jobService.getAllStatsInfo(req.session.user.id)
+    if (result) {
+      return res.render(VIEW.HOME_LAYOUT, {
+        child: VIEW.STATS_CHILD,
+        user: req.session.user,
+        stats: result,
+        toast: {
+          type: ToastType.ERROR,
+          messages: req.validationErrors
+        }
+      })
+    }
+  }
+  return res.render(VIEW.HOME_LAYOUT, {
+    child: VIEW.STATS_CHILD,
+    user: req.session.user,
+    stats: {
+      defaultStats: { pending: 0, interview: 0, declined: 0 },
+      monthlyApplications: Array.from({ length: 12 }, (_) => 0)
+    }
+  })
+}
+
 export const getAllJobsPage = async (req: Request<any, any, any, GetAllJobsReqQuery>, res: Response) => {
   if (req.validationErrors) {
     return res.render(VIEW.HOME_LAYOUT, {
@@ -124,12 +149,6 @@ export const getAllJobsPage = async (req: Request<any, any, any, GetAllJobsReqQu
       })
     }
   }
-  res.render(VIEW.HOME_LAYOUT, {
-    child: VIEW.ALL_JOBS_CHILD,
-    user: req.session.user,
-    job: req.query,
-    data: []
-  })
 }
 
 export const deleteJob = async (req: Request<DeleteJobReqParams>, res: Response) => {
