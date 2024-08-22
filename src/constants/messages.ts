@@ -37,5 +37,13 @@ export const USER_MESSAGES = {
   CREATE_JOB_SUCCESS: 'Create job succeessfully',
 
   // ADMIN
-  NOT_HAVE_PERMISSION: 'You do not have permission to access this site'
+  NOT_HAVE_PERMISSION: 'You do not have permission to access this site',
+
+  // DELETEJOB
+  JOB_ID_IS_REQUIRED: 'Job ID is required',
+  JOB_ID_MUST_BE_NUMER: 'Job ID must be a number',
+  DELETE_JOB_SUCCESS: 'Delete job successfully',
+
+  // PROFILE
+  PROFILE_UPDATE_SUCCESS: 'Profile update successfully'
 } as const

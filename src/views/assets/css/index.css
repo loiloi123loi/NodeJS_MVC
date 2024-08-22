@@ -68,7 +68,7 @@ html {
   --text-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
-  --borderRadius: 8px;
+  --borderRadius: 12px;
 }
 
 .dark-theme {
