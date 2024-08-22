@@ -440,7 +440,28 @@ COMMIT;
 
 ```
 
-2. Setup and run project
+2. Creat .env file
+
+```bash
+
+PORT = 
+NODE_ENV = ''
+SESSION_SECRET = ''
+SHOW_SQL = 
+
+DB_HOST = ''
+DB_PORT = 
+DB_NAME = ''
+DB_USER = ''
+DB_PASSWORD = ''
+
+USER_TABLE = ''
+USER_ROLES_TABLE = ''
+JOB_TABLE = ''
+
+```
+
+3. Setup and run project
 
 ```bash
 # Clone this repository
