@@ -23,6 +23,12 @@ export interface CreateJobReqBody {
   jobType: JobTypeEnum
 }
 
+export interface EditJobReqParams extends ParamsDictionary {
+  id: string
+}
+
+export interface EditJobReqBody extends CreateJobReqBody {}
+
 export interface GetAllJobsReqQuery extends ParsedQs {
   search: string
   searchStatus: string

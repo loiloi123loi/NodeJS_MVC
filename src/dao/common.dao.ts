@@ -51,7 +51,9 @@ export default class CommonDAO<T> {
     }
     const entries = Object.entries(data)
     let equalClause = ''
-    equalClause = `AND ${entries.map(([key]) => `${key} = ?`).join(' AND ')} `
+    if (entries.length > 0) {
+      equalClause = `AND ${entries.map(([key]) => `${key} = ?`).join(' AND ')}`
+    }
     const values = entries.map(([_, value]) => value)
     let likeClause = ''
     if (likes) {

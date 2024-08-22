@@ -6,6 +6,8 @@ import VIEW from '~/constants/views.constants'
 import {
   CreateJobReqBody,
   DeleteJobReqParams,
+  EditJobReqBody,
+  EditJobReqParams,
   GetAllJobsReqQuery,
   UpdateProfileReqBody
 } from '~/models/requests/User.requests'
@@ -113,6 +115,70 @@ export const getAdminPage = async (req: Request, res: Response) => {
       messages: [USER_MESSAGES.NOT_HAVE_PERMISSION]
     }
   })
+}
+
+export const getEditJobPage = async (req: Request<EditJobReqParams>, res: Response) => {
+  if (req.validationErrors) {
+    req.flash(
+      'messages',
+      JSON.stringify({
+        type: ToastType.ERROR,
+        messages: [req.validationErrors]
+      })
+    )
+    return res.redirect(PATH.DEFAULT_PATH)
+  }
+  const job = await jobService.getJob(Number(req.params.id))
+  const [str] = req.flash('messages')
+  if (str) {
+    const { messages, type } = JSON.parse(str)
+    return res.render(VIEW.HOME_LAYOUT, {
+      child: VIEW.EDIT_JOB_CHILD,
+      user: req.session.user,
+      job,
+      toast: {
+        type,
+        messages
+      }
+    })
+  }
+  res.render(VIEW.HOME_LAYOUT, {
+    child: VIEW.EDIT_JOB_CHILD,
+    user: req.session.user,
+    job
+  })
+}
+
+export const updateJob = async (req: Request<EditJobReqParams, any, EditJobReqBody>, res: Response) => {
+  if (req.validationErrors) {
+    req.flash(
+      'messages',
+      JSON.stringify({
+        type: ToastType.ERROR,
+        messages: [req.validationErrors]
+      })
+    )
+    return res.redirect(PATH.DEFAULT_PATH)
+  }
+  const result = await jobService.updateJob(Number(req.params.id), req.body)
+  if (result) {
+    req.flash(
+      'messages',
+      JSON.stringify({
+        type: ToastType.SUCCESS,
+        messages: [USER_MESSAGES.UPDATE_JOB_SUCCESS]
+      })
+    )
+    return res.redirect(PATH.ALL_JOBS)
+  }
+  req.flash(
+    'messages',
+    JSON.stringify({
+      type: ToastType.ERROR,
+      messages: [USER_MESSAGES.SOMETHING_WAS_WRONG_TRY_AGAIN_LATER]
+    })
+  )
+  return res.redirect(PATH.DEFAULT_PATH)
 }
 
 export const getStatsPage = async (req: Request, res: Response) => {
