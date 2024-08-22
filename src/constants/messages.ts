@@ -38,6 +38,9 @@ export const USER_MESSAGES = {
   JOB_TYPE_IS_NOT_ACCESSIBLE: 'Job type is not accessible',
   CREATE_JOB_SUCCESS: 'Create job succeessfully',
 
+  // ADMIN
+  NOT_HAVE_PERMISSION: 'You do not have permission to access this site',
+
   // EDITJOB
   JOB_ID_IS_REQUIRED: 'Job ID is required',
   JOB_ID_MUST_BE_A_NUMBER: 'Job ID must be a number',

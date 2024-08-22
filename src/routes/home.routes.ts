@@ -4,6 +4,7 @@ import {
   createJob,
   dashboardPage,
   deleteJob,
+  getAdminPage,
   getAllJobsPage,
   getEditJobPage,
   getProfilePage,
@@ -31,6 +32,7 @@ homeRouter.route(PATH.STATS).get(getStatsPage)
 homeRouter.route(PATH.ALL_JOBS).get(getAllJobsValidator, getAllJobsPage)
 homeRouter.route(PATH.DELETE_JOB).delete(deleteJobValidator, deleteJob)
 homeRouter.route(PATH.PROFILE).get(getProfilePage).patch(upload.single('avatar'), updateProfileValidator, updateProfile)
+homeRouter.route(PATH.ADMIN).get(getAdminPage)
 homeRouter.route(PATH.DEFAULT_PATH).get(dashboardPage).post(jobValidator, createJob)
 
 export default homeRouter

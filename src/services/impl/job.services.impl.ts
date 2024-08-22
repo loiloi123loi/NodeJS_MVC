@@ -1,10 +1,16 @@
 import { JobStatusEnum, JobTypeEnum, SortTypeEnum } from '~/constants/enums'
 import JOB from '~/dao/job.dao'
+import USER from '~/dao/user.dao'
 import { IJob } from '~/models/Job.model'
 import { CreateJobReqBody, GetAllJobsReqQuery } from '~/models/requests/User.requests'
 import { AllJobsReponse } from '~/models/responses/Job.responses'
 import { getEnumValueOrDefault } from '~/utils/enum'
 import { JobService } from '../job.services'
+
+export interface DashboardInfo {
+  totalUsers: number
+  totalJobs: number
+}
 
 export interface StatsInfo {
   defaultStats: { pending: number; interview: number; declined: number }
@@ -23,6 +29,22 @@ class JobServiceImpl implements JobService {
       console.log(`JobService.createJob`, err)
     }
     return false
+  }
+  async getDashboardInfo(user_id: number): Promise<DashboardInfo> {
+    try {
+      const totalUsers = (await USER.findAll({ verified: true }))?.length || 0
+      const totalJobs = (await JOB.findAll({}))?.length || 0
+      return {
+        totalUsers,
+        totalJobs
+      }
+    } catch (err) {
+      console.log(`JobService.createJob`, err)
+    }
+    return {
+      totalUsers: 0,
+      totalJobs: 0
+    }
   }
   async getJob(job_id: number): Promise<IJob | undefined> {
     try {
