@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import { LoginProvider, UserRole } from '~/constants/enums'
 import USER from '~/dao/user.dao'
 import USER_ROLE from '~/dao/userRole.dao'
-import { LoginReqBody, RegisterReqBody } from '~/models/requests/User.requests'
+import { LoginReqBody, RegisterReqBody, UpdateProfileReqBody } from '~/models/requests/User.requests'
 import User, { IUser } from '~/models/User.model'
 import { comparePassword, hashPassword } from '~/utils/bcrypt'
 import UserService from '../user.services'
@@ -53,6 +53,29 @@ class UserServiceImpl implements UserService {
       }
     } catch (err) {
       console.log(`UserService.loginLocalUser`, err)
+    }
+  }
+  async updateProfile(user_id: number, body: UpdateProfileReqBody): Promise<IUser | undefined> {
+    const { avatar } = body
+    const avatar_url = avatar?.filename
+    delete body.email
+    delete body.avatar
+    try {
+      await USER.updateOne(
+        {
+          id: user_id
+        },
+        {
+          ...body,
+          avatar: avatar_url
+        }
+      )
+      const user = await USER.findOne({
+        id: user_id
+      })
+      return user
+    } catch (err) {
+      console.log(`UserService.updateProfile`, err)
     }
   }
 }

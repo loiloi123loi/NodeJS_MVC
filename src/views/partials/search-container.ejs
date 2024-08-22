@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="../assets/css/search-container.css" />
+<% 
+  const {search, searchStatus, searchType, sort} = job
+  const jobStatusOptions = ['all', 'pending', 'interview', 'declined'];
+  const jobTypeOptions = ['all', 'full-time', 'part-time', 'internship'];
+  const sortOptions = ['newest', 'oldest', 'a-z', 'z-a'];
+%>
+<section class="search-container">
+  <form class="form" action="/all-jobs" method="GET">
+    <h5 class="form-title">search form</h5>
+    <div class="form-center">
+      <%- include('../partials/form-row.ejs', {type: 'text', name: 'search', value: search}) %>
+      <%- include('../partials/form-row-select.ejs', {type: 'text', name: 'searchStatus', labelText: 'job status', list: jobStatusOptions, value: searchStatus}) %>
+      <%- include('../partials/form-row-select.ejs', {type: 'text', name: 'searchType', labelText: 'job type', list: jobTypeOptions, value: searchType}) %>
+      <%- include('../partials/form-row-select.ejs', {type: 'text', name: 'sort', list: sortOptions, value: sort}) %>
+      <button class="btn form-btn delete-btn" id="delete-btn" type="reset">
+        Reset Search Values
+      </button>
+      <button class="btn form-btn delete-btn" type="submit">
+        Search
+      </button>
+    </div>
+  </form>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const deleteBtn = document.getElementById('delete-btn');
+    deleteBtn?.addEventListener('click', function() {
+      window.location.href = '/all-jobs';
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="../assets/css/stat-item.css" />
+<style>
+  .stat-item-<%- index %> {
+    border-bottom: 5px solid <%=color %>;
+
+    .count {
+      color: <%=color %>;
+    }
+
+    .icon {
+      background: <%=bcg %>;
+
+      svg {
+        color: <%=color %>;
+      }
+    }
+  }
+</style>
+<article class="stat-item-<%- index %>">
+  <header>
+    <span class="count"><%= count %></span>
+    <span class="icon"><%- icon %></span>
+  </header>
+  <h5 class="title"><%= title %></h5>
+</article>

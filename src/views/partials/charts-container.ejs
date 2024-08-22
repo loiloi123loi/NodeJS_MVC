@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="../assets/css/charts-container.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<section class="charts-container">
+  <h4>Monthly Applications</h4>
+  <button type="button">
+    Area Chart
+  </button>
+  <canvas id="myChart"></canvas>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chartsContainer = document.querySelector('.charts-container')
+    const buttonChart = chartsContainer?.querySelector('button')
+    let myChart = null
+
+    buttonChart?.addEventListener('click', function() {
+      const isArea = buttonChart.textContent.trim() === 'Area Chart'
+      buttonChart.textContent = isArea ? 'Bar Chart' : 'Area Chart'
+      toggleChart(!isArea)
+    })
+
+    const toggleChart = (isArea = true) => {
+      const data = <%- JSON.stringify(monthlyApplications) %>;
+      const ctx = document.getElementById('myChart').getContext('2d');
+      myChart?.destroy()
+      myChart = new Chart(ctx, {
+        type: isArea ? 'bar' : 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            data: data,
+            backgroundColor: '#2cb1bc',
+            borderColor: '#2cb1bc',
+            borderWidth: 2,
+            barThickness: 75
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0,
+                color: '#ccc'
+              },
+              grid: {
+                color: '#ccc',
+                lineWidth: 1,
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              grid: {
+                color: '#ccc',
+                lineWidth: 1,
+              },
+              ticks: {
+                color: '#ccc'
+              },
+            }
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              enabled: true
+            }
+          },
+        }
+      });
+    }
+
+    toggleChart()
+  })
+</script>

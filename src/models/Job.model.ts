@@ -25,7 +25,7 @@ export default class JobModel {
 
   constructor({ id, position, company, jobLocation, status, jobType, created_by, created_at, updated_at }: IJob) {
     const now = new Date()
-    this.id = id
+    this.id = id || undefined
     this.position = position
     this.company = company
     this.jobLocation = jobLocation

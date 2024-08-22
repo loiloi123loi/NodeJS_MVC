@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="../assets/css/jobs-container.css" />
+<% const {jobs, totalJobs, numOfPages, page} = data %>
+<section class="list-jobs-container">
+  <% if (jobs.length === 0) { %>
+  <h2>No jobs to display...</h2>
+  <% } else { %>
+  <h5>
+    <%= totalJobs %> job<%= jobs.length > 1 ? 's' : '' %> found (<%= numOfPages %> page<%= numOfPages > 1 ? 's' : '' %>)
+  </h5>
+  <div class="jobs">
+    <% jobs.forEach((job, id) => { %>
+    <%- include('./job.ejs', {id, job}) %>
+    <% }) %>
+  </div>
+  <% if(numOfPages > 1) { %>
+  <%- include('./pagination.ejs') %>
+  <% } %>
+  <% } %>
+</section>
