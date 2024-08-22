@@ -24,6 +24,30 @@ class JobServiceImpl implements JobService {
     }
     return false
   }
+  async getJob(job_id: number): Promise<IJob | undefined> {
+    try {
+      const job = await JOB.findOne({
+        id: job_id
+      })
+      return job
+    } catch (err) {
+      console.log(`JobService.getJob`, err)
+    }
+  }
+  async updateJob(job_id: number, data: Partial<IJob>): Promise<boolean> {
+    try {
+      await JOB.updateOne(
+        {
+          id: job_id
+        },
+        data
+      )
+      return true
+    } catch (err) {
+      console.log(`JobService.updateJob`, err)
+    }
+    return false
+  }
   async getAllStatsInfo(user_id: number): Promise<StatsInfo> {
     try {
       const stats = await JOB.findAll(

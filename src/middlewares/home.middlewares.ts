@@ -1,8 +1,9 @@
 import { checkSchema } from 'express-validator'
+import { JobStatusEnum, JobTypeEnum } from '~/constants/enums'
 import { USER_MESSAGES } from '~/constants/messages'
 import { validate } from '~/utils/validation'
 
-export const createJobValidator = validate(
+export const jobValidator = validate(
   checkSchema(
     {
       position: {
@@ -39,7 +40,11 @@ export const createJobValidator = validate(
         isString: {
           errorMessage: USER_MESSAGES.JOB_STATUS_MUST_BE_A_STRING
         },
-        trim: true
+        trim: true,
+        custom: {
+          options: (value) => Object.values(JobStatusEnum).includes(value),
+          errorMessage: USER_MESSAGES.JOB_STATUS_IS_NOT_ACCESSIBLE
+        }
       },
       jobType: {
         notEmpty: {
@@ -48,10 +53,31 @@ export const createJobValidator = validate(
         isString: {
           errorMessage: USER_MESSAGES.JOB_TYPE_MUST_BE_A_STRING
         },
-        trim: true
+        trim: true,
+        custom: {
+          options: (value) => Object.values(JobTypeEnum).includes(value),
+          errorMessage: USER_MESSAGES.JOB_TYPE_IS_NOT_ACCESSIBLE
+        }
       }
     },
     ['body']
+  )
+)
+
+export const editJobParamsValidator = validate(
+  checkSchema(
+    {
+      id: {
+        notEmpty: {
+          errorMessage: USER_MESSAGES.JOB_ID_IS_REQUIRED
+        },
+        trim: true,
+        isNumeric: {
+          errorMessage: USER_MESSAGES.JOB_ID_MUST_BE_A_NUMBER
+        }
+      }
+    },
+    ['params']
   )
 )
 
@@ -119,7 +145,7 @@ export const deleteJobValidator = validate(
           errorMessage: USER_MESSAGES.JOB_ID_IS_REQUIRED
         },
         isNumeric: {
-          errorMessage: USER_MESSAGES.JOB_ID_MUST_BE_NUMER
+          errorMessage: USER_MESSAGES.JOB_ID_MUST_BE_A_NUMBER
         },
         trim: true
       }

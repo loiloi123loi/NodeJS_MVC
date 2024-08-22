@@ -32,13 +32,18 @@ export const USER_MESSAGES = {
   JOB_LOCATION_MUST_BE_A_STRING: 'Job location must be a string',
   JOB_STATUS_IS_REQUIRED: 'Job status is required',
   JOB_STATUS_MUST_BE_A_STRING: 'Job status must be a string',
+  JOB_STATUS_IS_NOT_ACCESSIBLE: 'Job status is not accessible',
   JOB_TYPE_IS_REQUIRED: 'Job type is required',
   JOB_TYPE_MUST_BE_A_STRING: 'Job type must be a string',
+  JOB_TYPE_IS_NOT_ACCESSIBLE: 'Job type is not accessible',
   CREATE_JOB_SUCCESS: 'Create job succeessfully',
 
-  // DELETEJOB
+  // EDITJOB
   JOB_ID_IS_REQUIRED: 'Job ID is required',
-  JOB_ID_MUST_BE_NUMER: 'Job ID must be a number',
+  JOB_ID_MUST_BE_A_NUMBER: 'Job ID must be a number',
+  UPDATE_JOB_SUCCESS: 'Update job success',
+
+  // DELETEJOB
   DELETE_JOB_SUCCESS: 'Delete job successfully',
 
   // PROFILE

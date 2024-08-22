@@ -105,7 +105,11 @@ export default class CommonDAO<T> {
     const whereClause = conditionEntries.map(([key]) => `${key} = ?`).join(' AND ')
     const conditionValues = conditionEntries.map(([_, value]) => value)
     const values = [...setValues, ...conditionValues]
-    await pool.execute(`UPDATE ${this.tableName} SET ${setClause} WHERE ${whereClause} LIMIT 1`, values)
+    const sql = `UPDATE ${this.tableName} SET ${setClause} WHERE ${whereClause} LIMIT 1`
+    if (Boolean(process.env.SHOW_SQL) === true) {
+      console.log(sql, values)
+    }
+    await pool.execute(sql, values)
   }
 
   async update(data: Partial<T>, conditions: Partial<T>): Promise<void> {
@@ -116,6 +120,10 @@ export default class CommonDAO<T> {
     const whereClause = conditionEntries.map(([key]) => `${key} = ?`).join(' AND ')
     const conditionValues = conditionEntries.map(([_, value]) => value)
     const values = [...setValues, ...conditionValues]
-    await pool.execute(`UPDATE ${this.tableName} SET ${setClause} WHERE ${whereClause}`, values)
+    const sql = `UPDATE ${this.tableName} SET ${setClause} WHERE ${whereClause}`
+    if (Boolean(process.env.SHOW_SQL) === true) {
+      console.log(sql, values)
+    }
+    await pool.execute(sql, values)
   }
 }
