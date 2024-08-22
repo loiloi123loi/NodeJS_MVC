@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NodeJs & ExpressJs MVC</title>
+  <link rel="stylesheet" href="../assets/css/index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <% if(child) { %>
+    <%- include(child) %>
+    <% } %>
+    <% 
+      const _toast = typeof toast !== 'undefined' ? toast : undefined
+    %>
+    <% if(_toast) { %>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        toastr.options = {
+          "newestOnTop": true,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": true,
+          "showDuration": "100",
+          "hideDuration": "1000",
+          "timeOut": "3000",
+          "extendedTimeOut": "000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        <% _toast.messages?.forEach(function(message, index) { %>
+        setTimeout(function() {
+          toastr['<%- _toast.type %>']('<%- message %>');
+        }, <%= index * 100 %>);
+        <% }); %>
+      });
+    </script>
+    <% } %>
+  </div>
+</body>
+
+</html>

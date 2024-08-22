@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="../assets/css/navbar.css" />
+<% 
+  const _fullName = typeof user !== 'undefined' ? user.fullName : ''
+%>
+<nav>
+  <div class="nav-center">
+    <button type="button" class="toggle-btn">
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.83 352h262.34A12.82 12.82 0 0 0 288 339.17v-38.34A12.82 12.82 0 0 0 275.17 288H12.83A12.82 12.82 0 0 0 0 300.83v38.34A12.82 12.82 0 0 0 12.83 352zm0-256h262.34A12.82 12.82 0 0 0 288 83.17V44.83A12.82 12.82 0 0 0 275.17 32H12.83A12.82 12.82 0 0 0 0 44.83v38.34A12.82 12.82 0 0 0 12.83 96zM432 160H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0 256H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"></path>
+      </svg>
+    </button>
+    <div>
+      <%- include('../partials/logo.ejs') %>
+      <h4 class="logo-text">dashboard</h4>
+    </div>
+    <div class="btn-container">
+      <button class="dark-btn">
+        <div class="toggle-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="toggle-icon" viewBox="0 0 16 16">
+            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278" />
+            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+          </svg>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="toggle-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+          </svg>
+        </div>
+      </button>
+      <div class="container-logout">
+        <button type="button" class="btn">
+          <% if(user.avatar) { %>
+          <img src="/uploads/<%= user.avatar %>" alt="avatar" class="img">
+          <% } else { %>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" class="avatar-img">
+            <path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"></path>
+          </svg>
+          <% } %>
+          <%= _fullName %>
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path>
+          </svg>
+        </button>
+        <div class="dropdown">
+          <button type="button" class="dropdown-btn">
+            logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const containerLogout = document.querySelector('.container-logout');
+    const dropdown = document.querySelector('.dropdown');
+    containerLogout.addEventListener('click', function() {
+      dropdown.classList.toggle('show-dropdown');
+    });
+    dropdown.addEventListener('click', function() {
+      fetch('/logout', {
+          method: 'DELETE',
+          credentials: 'same-origin'
+        })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/landing';
+          } else {}
+        })
+        .catch(error => {
+          setTimeout(function() {
+            toastr['error']('Logout failed');
+          }, 100);
+        });
+    });
+
+    let isSidebarOpen = true
+    const toggleSidebar = function() {
+      isSidebarOpen = !isSidebarOpen
+      const bigSidebar = document.getElementById('big-sidebar');
+      const smallSidebar = document.getElementById('small-sidebar');
+      const divBig = bigSidebar.querySelector('.sidebar-container');
+      const divSmall = smallSidebar.querySelector('.sidebar-container');
+      if (window.innerWidth <= 992) {
+        if (isSidebarOpen) {
+          divBig.classList.add('show-sidebar')
+          divSmall.classList.remove('show-sidebar')
+        } else {
+          divBig.classList.remove('show-sidebar')
+          divSmall.classList.add('show-sidebar')
+        }
+      } else {
+        if (isSidebarOpen) {
+          divBig.classList.add('show-sidebar')
+          divSmall.classList.remove('show-sidebar')
+        } else {
+          divBig.classList.remove('show-sidebar')
+          divSmall.classList.add('show-sidebar')
+        }
+      }
+    }
+    const toggleButton = document.querySelector('.toggle-btn')
+    toggleButton.addEventListener('click', toggleSidebar);
+
+    let darkTheme = window.localStorage.getItem('dark-theme') === 'true'
+    const changeTheme = () => {
+      const body = document.querySelector('body')
+      window.localStorage.setItem('dark-theme', darkTheme)
+      const toggleIcon = document.querySelector('.toggle-icon');
+      const svgToggleIcon = toggleIcon.querySelector('.toggle-icon');
+      toggleIcon.removeChild(svgToggleIcon);
+      if (darkTheme) {
+        body.classList.add('dark-theme')
+        toggleIcon.innerHTML = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="toggle-icon" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+          </svg>`
+      } else {
+        body.classList.remove('dark-theme')
+        toggleIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="toggle-icon" viewBox="0 0 16 16">
+              <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"></path>
+              <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"></path>
+            </svg>`
+      }
+    }
+    changeTheme()
+    const darkBtn = document.querySelector('.dark-btn')
+    darkBtn.addEventListener('click', function() {
+      darkTheme = !darkTheme
+      changeTheme()
+    });
+
+    const closeBtn = document.querySelector('.close-btn')
+    closeBtn.addEventListener('click', toggleSidebar);
+  });
+</script>

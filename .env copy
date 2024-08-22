@@ -1,0 +1,14 @@
+PORT = 
+NODE_ENV = ''
+SESSION_SECRET = ''
+SHOW_SQL = 
+
+DB_HOST = ''
+DB_PORT = 
+DB_NAME = ''
+DB_USER = ''
+DB_PASSWORD = ''
+
+USER_TABLE = ''
+USER_ROLES_TABLE = ''
+JOB_TABLE = ''
